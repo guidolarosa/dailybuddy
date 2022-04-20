@@ -66,10 +66,10 @@ const StyledDropdown = styled.div`
     opacity: 0;
     visibility: hidden;
     box-shadow: ${props => props.theme.dropdownShadow};
-    transform-origin: top right;
+    transform-origin: 100% -200%;
     transform: translateY(2rem) scale(0.8) !important;
     &.visible {
-      transform-origin: top right;
+      transform-origin: 100% -200%;
       transform: translateY(2rem) scale(1) !important;
       opacity: 1;
       top: 2rem;

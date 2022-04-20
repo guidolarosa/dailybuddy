@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import db from './../utils/firestore_db';
+import db from '../utils/firebase';
 import { useEffect, useState } from 'react';
 import { collection, getDocs} from 'firebase/firestore';
 

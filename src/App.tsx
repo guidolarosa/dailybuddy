@@ -8,11 +8,20 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import TaskList from './components/TaskList';
 
+import { signInWithGoogle } from './utils/firebase'
+
 function App() {
   const [fontSize, setFontSize] = useState(8);
   const [currentTheme, setCurrentTheme] = useState('plantasia');
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   const [isSidebarVisible, setIsSidebarVisible] = useState(true)
+
+  useEffect(() => {
+    console.log('What')
+    // signInWithGoogle().then((e) => {
+    //   console.log(e);
+    // });
+  }, [])
 
   const themes : Themes = {
     'light': theme,
@@ -56,6 +65,8 @@ function App() {
       html.style.fontSize = `${fontSize}px`;
     };
   }, [fontSize]);
+
+  // Authentication
 
   return (
     <ThemeProvider theme={themes[themeArray[currentThemeIndex].name as keyof Themes]}>
