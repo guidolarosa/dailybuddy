@@ -41,7 +41,7 @@ const Navbar = (props : any) => {
         !props.user ? (
           <div className="navbar-block login-button">
             <div className="navbar-button" onClick={props.signIn}>
-              Login
+              Log in
             </div>
           </div>
         ) : (
