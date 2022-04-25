@@ -15,6 +15,8 @@ import {
 import UIConstants from './utils/ui_constants'
 import { auth, signInWithGoogle, getGoogleUserData, getFirebaseUserTasks } from './utils/firebase'
 import { ThemeProvider } from 'styled-components'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,7 +30,9 @@ const Root = (props : any) => {
   const [user, setUser] = useState<any>({});
   const [tasks, setTasks] = useState<any>([]);
 
-
+  useEffect(() => {
+    AOS.init();
+  }, [])
 
 
   useEffect(() => {

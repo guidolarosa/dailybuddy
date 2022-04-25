@@ -17,7 +17,7 @@ const Home = (props : any) => {
                 signIn={handleLoginClick}
             />
             <main>
-                <section className="hero">
+                <section className="hero" data-aos="fade-up">
                     <section className="hero-inner-content">
                         <h1>Keep your day organized<br/>with DailyBuddy</h1>
                         <p>

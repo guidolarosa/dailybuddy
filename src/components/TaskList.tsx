@@ -53,7 +53,7 @@ const TaskList = (props : any) => {
       </div>
       <PercentageBar percentage={completionPercentage}/>
       {tasks.length > 0 ? (
-          <ul>
+          <ul data-aos="fade-up">
             {tasks.map((task : any, i : number) => (
               <TaskItem task={task} key={task.id} />
             ))}
