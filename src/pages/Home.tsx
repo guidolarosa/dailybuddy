@@ -18,13 +18,15 @@ const Home = (props : any) => {
             />
             <main>
                 <section className="hero">
-                    <h1>Keep your day organized<br/>with DailyBuddy</h1>
-                    <p>
-                        Keep track of your task in a simple and focused way.
-                    </p>
-                    <button onClick={handleLoginClick}>Log in</button>
-                    <section className="hero-graphic">
-                        <img src={snapshot} />
+                    <section className="hero-inner-content">
+                        <h1>Keep your day organized<br/>with DailyBuddy</h1>
+                        <p>
+                            Keep track of your task in a simple and focused way.
+                        </p>
+                        <section className="hero-graphic">
+                            <img src={snapshot} />
+                        </section>
+                        <button onClick={handleLoginClick}>Log in</button>
                     </section>
                 </section>
             </main>
@@ -56,32 +58,35 @@ const StyledHome = styled.div`
             justify-content: center;
             height: 100%;
             position: relative;
-            h1 {
-                font-size: 7rem;
-                line-height: 10rem;
-                margin-bottom: 3rem;
-            }
-            p {
-                font-size: 3rem;
-                margin-bottom: 3rem;
-            }
-            button {
-                width: fit-content;
-                margin-top: 2rem;
-                background: ${props => props.theme.black};
-                color: ${props => props.theme.invertedFont};
-                border: 0;
-                height: 7rem;
-                font-size: 3rem;
-                padding: 0 4rem;
-                border-radius: 1rem;
-            }
-            .hero-graphic {
-                position: absolute;
-                top: 32rem;
-                right: -25rem;
-                img {
-                    height: 40rem;
+            .hero-inner-content {
+                width: 90rem;
+                h1 {
+                    font-size: 7rem;
+                    line-height: 10rem;
+                    margin-bottom: 3rem;
+                }
+                p {
+                    font-size: 3rem;
+                    margin-bottom: 3rem;
+                }
+                button {
+                    width: fit-content;
+                    margin-top: 2rem;
+                    background: ${props => props.theme.black};
+                    color: ${props => props.theme.invertedFont};
+                    border: 0;
+                    height: 7rem;
+                    font-size: 3rem;
+                    padding: 0 4rem;
+                    border-radius: 1rem;
+                }
+                .hero-graphic {
+                    position: absolute;
+                    top: 32rem;
+                    left: calc(50% + 30rem);
+                    img {
+                        height: 40rem;
+                    }
                 }
             }
         }
