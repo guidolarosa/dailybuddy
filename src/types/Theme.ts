@@ -32,7 +32,17 @@ export default interface Theme {
     priorityL: string,
     priorityFont: string,
 
-    dropdownShadow: string
+    dropdownShadow: string,
+
+    completed?: string,
+
+    profileButton?: string,
+
+    breakpoint_xs: string,
+    breakpoint_s: string,
+    breakpoint_m: string,
+    breakpoint_l: string,
+    breakpoint_xl: string,
 }
 
 export interface Themes {

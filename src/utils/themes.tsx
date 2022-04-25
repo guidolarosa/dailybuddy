@@ -1,4 +1,4 @@
-import Theme from './../types/Theme'
+import Theme from '../types/Theme'
 
 const borderWidth = '0.2rem';
 
@@ -8,8 +8,17 @@ const aquaHue = 170;
 const appleHue = 360;
 const lavenderHue = 260;
 
+const commonTheme = {
+    breakpoint_xs: '360px',
+    breakpoint_s: '520px',
+    breakpoint_m: '790px',
+    breakpoint_l: '1080px',
+    breakpoint_xl: '1260px',
+}
+
 
 export const theme : Theme = {
+    ...commonTheme,
     background: `hsla(${defaultHue}, 43%, 90%, 1)`,
     backgroundLight: `hsla(${defaultHue}, 43%, 93%, 1)`,
     backgroundDark: `hsla(${defaultHue}, 43%, 80%, 1)`,
@@ -43,10 +52,12 @@ export const theme : Theme = {
     priorityL: `hsla(160, 50%, 85%, 1)`,
     priorityFont: `hsla(0, 0%, 11%, 1)`,
 
-    dropdownShadow: `0px 4px 8px hsla(${defaultHue}, 43%, 25%, 0.5)`
+    dropdownShadow: `0px 4px 8px hsla(${defaultHue}, 43%, 25%, 0.5)`,
+    profileButton: `white`,
 }
 
 export const aqua : Theme = {
+    ...commonTheme,
     background: `hsla(${aquaHue}, 43%, 90%, 1)`,
     backgroundLight: `hsla(${aquaHue}, 43%, 93%, 1)`,
     backgroundDark: `hsla(${aquaHue}, 43%, 80%, 1)`,
@@ -82,6 +93,7 @@ export const aqua : Theme = {
 }
 
 export const plantasia : Theme = {
+    ...commonTheme,
     background: `hsla(${plantasiaHue}, 43%, 90%, 1)`,
     backgroundLight: `hsla(${plantasiaHue}, 43%, 93%, 1)`,
     backgroundDark: `hsla(${plantasiaHue}, 43%, 80%, 1)`,
@@ -115,10 +127,13 @@ export const plantasia : Theme = {
     priorityL: `hsla(160, 50%, 85%, 1)`,
     priorityFont: `hsla(0, 0%, 11%, 1)`,
 
-    dropdownShadow: `0px 4px 8px hsla(${plantasiaHue}, 43%, 25%, 0.5)`
+    dropdownShadow: `0px 4px 8px hsla(${plantasiaHue}, 43%, 25%, 0.5)`,
+
+    completed: `hsla(120, 79%, 72%, 1)`,
 }
 
 export const apple : Theme = {
+    ...commonTheme,
     background: `hsla(${appleHue}, 43%, 90%, 1)`,
     backgroundLight: `hsla(${appleHue}, 43%, 93%, 1)`,
     backgroundDark: `hsla(${appleHue}, 43%, 80%, 1)`,
@@ -154,6 +169,7 @@ export const apple : Theme = {
 }
 
 export const darkTheme : Theme = {
+    ...commonTheme,
     background: 'hsla(250, 43%, 5%, 1)',
     backgroundLight: 'hsla(250, 43%, 8%, 1)',
     backgroundDark: 'hsla(250, 43%, 4%, 1)',

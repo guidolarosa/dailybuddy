@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from 'react';
+import {useEffect, useState} from 'react';
 
 const Task = (props : any) => {
   const { task } = props;
@@ -15,10 +15,22 @@ const Task = (props : any) => {
     3: 'L'
   };
 
+  const [isChecked, setIsChecked] = useState<boolean>(task.status);
+
+  useEffect(() => {
+    if (task.status === 'complete') {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
+  }, [task])
+
   return (
-    <StyledTask>
+    <StyledTask className={`${isChecked ? 'completed' : ''}`}>
       <div className="checkbox-wrapper">
-        <input name="completed" type="checkbox" />
+        <input name="completed" type="checkbox" value={isChecked as any} onChange={() => {
+          setIsChecked(!isChecked);
+        }}/>
       </div>
       {task.date && (
         <div className="date">
@@ -58,6 +70,9 @@ const StyledTask = styled.li`
   display: flex;
   align-items: center;
   padding: 0 2rem;
+  &.completed {
+    background: ${props => props.theme.backgroundExtraDark};
+  }
   &:first-child {
     border-radius: 8px 8px 0 0;
   }

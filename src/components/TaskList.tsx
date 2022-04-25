@@ -1,67 +1,36 @@
 import styled from "styled-components";
-import db from '../utils/firebase';
 import { useEffect, useState } from 'react';
-import { collection, getDocs} from 'firebase/firestore';
-
-import Modal from './Modal';
-
-import TaskType from './../types/Task'
 
 import TaskItem from './Task';
+import PercentageBar from "./PercentageBar";
+import CreateTaskModal from "./CreateTaskModal"
 
 const TaskList = (props : any) => {
 
-  const [tasks, setTasks] = useState<any[]>([]);
   const [isListLoaded, setIsListLoaded] = useState(false);
   const [forceEmptyList, setForceEmptyList] = useState(false);
   const [showTaskModal, setShowTaskModal] = useState(false);
+  const [completionPercentage, setCompletionPercentage] = useState(50);
+  const [completedTasks, setCompletedTasks] = useState({});
 
-  class Task {
-    [x: string]: any;
-    constructor(Task : TaskType) {
-      this.type = Task.type;
-      this.id = Task.id;
-      this.creationDate = Task.creationDate;
-      this.name = Task.name;
-      this.date = Task.date;
-      this.priority = Task.priority || 2;
-      this.reward = Task.reward || 0;
-      this.status = Task.status || 'incomplete';
-      this.labels = Task.labels;
-      this.tags = Task.tags || [];
-    }
-  }
+  const {
+    setTasks,
+    tasks,
+    user
+  } = props;
 
   useEffect(() => {
     if (forceEmptyList) {
       setTasks([]);
-    } else {
-      getTasks();
     }
   }, [])
 
-  async function getTasks() {
-    const querySnapshot = await getDocs(collection(db, 'tasks'));
-    let tasks : any = []
-    querySnapshot.forEach((doc) => {
-      let retrievedTask = doc.data();
-      let taskOptions : TaskType = {
-        date: new Date('December 17, 1995 15:30:00'),
-        type: retrievedTask.type,
-        id: doc.id,
-        name: retrievedTask.name,
-        creationDate: retrievedTask.creationDate.seconds,
-        priority: retrievedTask.priority,
-        reward: retrievedTask.reward,
-        status: retrievedTask.status,
-        labels: retrievedTask.labels
-      };
-      let task = new Task(taskOptions);
-      tasks.push(task);
-    })
-    setTasks(tasks);
-    setIsListLoaded(true)
-  }
+  useEffect(() => {
+    console.log(tasks)
+    if (tasks.length > 0) {
+      setIsListLoaded(true)
+    }
+  }, [tasks])
 
   return (
     <StyledTaskList className="task-list">
@@ -69,24 +38,29 @@ const TaskList = (props : any) => {
         <h2>My Tasks</h2>
         <button onClick={() => {setShowTaskModal(true)}} className="create-task">+ Create Task</button>
         {showTaskModal && (
-          <Modal header={'Create a task'} onCloseClick={() => {setShowTaskModal(false)}} />
+          <CreateTaskModal 
+            isOpen={showTaskModal} 
+            setIsOpen={(e : any) => {setShowTaskModal(e)}}
+            header={'Create a task'} 
+            size={'large'} 
+            userUID={user.uid}
+            setTasks={setTasks}
+            onCloseClick={() => {
+              setShowTaskModal(false)
+            }} 
+          />
         )}
       </div>
-      {isListLoaded ? (
-        tasks.length > 0 ? (
+      <PercentageBar percentage={completionPercentage}/>
+      {tasks.length > 0 ? (
           <ul>
-            {tasks.map((task, i) => (
+            {tasks.map((task : any, i : number) => (
               <TaskItem task={task} key={task.id} />
             ))}
           </ul>
         ) : (
-          <span className="list-empty">
-            Your list is empty! Go ahead and add some tasks
-          </span>
-        )
-      ) : (
-        <span className="loading">
-          Loading...
+        <span className="list-empty">
+          Your list is empty! Go ahead and add some tasks
         </span>
       )} 
     </StyledTaskList>
@@ -108,7 +82,7 @@ const StyledTaskList = styled.section`
     .create-task {
       color: ${props => props.theme.invertedFont};
       background-color: ${props => props.theme.black};
-      height: 4rem;
+      height: 5rem;
       border: 0;
       outline: 0;
       font-size: 2rem;
@@ -118,7 +92,6 @@ const StyledTaskList = styled.section`
       cursor: pointer;
     }
   }
-  .loading,
   .list-empty {
     font-size: 3rem;
     text-align: center;
@@ -134,6 +107,12 @@ const StyledTaskList = styled.section`
   }
   ul {
     margin-bottom: auto;
+  }
+  @media screen and (max-width: ${props => props.theme.breakpoint_xl}) {
+    width: calc(100vw / 12 * 7);
+  }
+  @media screen and (max-width: ${props => props.theme.breakpoint_m}) {
+    width: calc(100vw / 12 * 11);
   }
 `;
 

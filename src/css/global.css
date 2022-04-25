@@ -54,3 +54,8 @@ table {
 * {
   transition: 0.25s ease-in-out background-color;
 }
+
+button,
+input[type="button"] {
+	font-family: Noto;
+}

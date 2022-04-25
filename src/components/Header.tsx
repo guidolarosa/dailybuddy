@@ -3,14 +3,6 @@ import Navbar from './Navbar';
 
 const Header = (props : any) => {
 
-  const {
-    setFontSize,
-    fontSize,
-    setCurrentTheme,
-    currentTheme,
-    nextTheme,
-  } = props;
-
   return (
     <StyledHeader>
       <Navbar {...props} />
